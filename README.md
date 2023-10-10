@@ -1,12 +1,20 @@
 # brn
 
-Bulk rename. Renger stle rename
+Bulk rename. Rename files in a sweep. Use whatever [editor](#editor) you prefer.
 
-# Demo
+## Install
+
+```bash
+go install https://github.com/wizsk/brn
+```
+or see releases
+
+
+## Demo
 
 ![Demo gif](/imgs/demo.gif)
 
-# Usages
+## Usages
 
 ```
 brn
@@ -29,10 +37,18 @@ EXAMPLES:
 	2. Remaning selected files
 		$ brn *.mp4 # to rename the mp4 only
 ```
+## Editor
 
-# Insall
+You can use whatever editor you want by setting `EDITOR` env var. Preferably the editor should be terminal based.
 
 ```bash
-go install https://github.com/wizsk/brn
+export EDITOR=nvim # nvim user btw
 ```
-or see releases
+
+But for some wired reason you wanna use vscode use this flag too. Use [vscodium](https://vscodium.com/) or maybe you love to give Microsoft your data ;). Or If you are using windows may God have mercy on you.
+
+```bash
+export EDITOR='code -w' # --wait
+```
+
+
