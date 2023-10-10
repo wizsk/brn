@@ -25,6 +25,7 @@ func main() {
 		if stat, err = os.Stat(args[0]); err != nil {
 		} else if !stat.IsDir() {
 			fmt.Fprintf(os.Stderr, "err: %s is not a dir\nYou have provided 1 argumet so the programm will assume you want to remane the contens in that directory\n", args[0])
+			return
 		}
 		err = renameDir(args[0], *incudeDirs, *inclueHiddenFiles)
 	default:
@@ -32,7 +33,8 @@ func main() {
 	}
 
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "err: %s is not a dir\nYou have provided 1 argumet so the programm will assume you want to remane the contens in that directory\n", args[0])
+		fmt.Fprintf(os.Stderr, "err: %s\n", err)
+		os.Exit(1)
 	}
 }
 

@@ -16,9 +16,10 @@ func renameDir(currDir string, includeDir, includeHidden bool) error {
 	fileNamesBuff := bytes.Buffer{}
 
 	for _, file := range dirContents {
-		if !includeDir && file.IsDir() {
+		if file.IsDir() && !includeDir {
 			continue
 		}
+
 		if !includeHidden && strings.HasPrefix(file.Name(), ".") {
 			continue
 		}

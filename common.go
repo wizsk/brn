@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
 )
 
 func rename(fileNames []string, fileNamesBuff bytes.Buffer, currDir string) error {
@@ -59,8 +60,9 @@ func rename(fileNames []string, fileNamesBuff bytes.Buffer, currDir string) erro
 	}
 
 	// rename the dam thing
+	renameTracker := strings.Builder{}
 	renameCount := 0
-	fmt.Println("Files renamed:")
+	renameTracker.WriteString("Files renamed:\n")
 	for i, val := range fileNames {
 		if val == changedNames[i] {
 			continue
@@ -72,8 +74,10 @@ func rename(fileNames []string, fileNamesBuff bytes.Buffer, currDir string) erro
 			return err
 		}
 		renameCount++
-		fmt.Printf("\t%s -> %s\n", old, curr)
+		renameTracker.WriteString(fmt.Sprintf("\t'%s' -> '%s'\n", old, curr))
 	}
+
+	fmt.Print(renameTracker.String())
 	fmt.Printf("\ntotal %d files remaned out of %d files\n", renameCount, len(fileNames))
 
 	return nil
