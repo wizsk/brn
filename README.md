@@ -1,13 +1,13 @@
 # brn
 
-Bulk rename. Rename files in a sweep. Use whatever [editor](#editor) you prefer.
+Bulk rename files in a sweep with your favourite text [editor](#editor). (I know it's nvim).
 
 ## Install
 
 ```bash
 go install https://github.com/wizsk/brn
 ```
-or see releases
+or see release.
 
 
 ## Demo

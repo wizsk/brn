@@ -6,6 +6,8 @@ import (
 	"os"
 )
 
+const vertion = "1.0"
+
 func main() {
 	incudeDirs := flag.Bool("d", false, "incule dirs")
 	inclueHiddenFiles := flag.Bool("p", false, "incule hidden files")
@@ -36,7 +38,7 @@ func main() {
 
 func usages() {
 	fmt.Printf(`
-brn
+brn v%s
 Bulk renamer
 
 USAGE:
@@ -55,6 +57,6 @@ EXAMPLES:
 
 	2. Remaning selected files
 		$ brn *.mp4 # to rename the mp4 only
-`)
+`, vertion)
 
 }
