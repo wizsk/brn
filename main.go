@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-const vertion = "1.0"
+const vertion = "1.1"
 
 func main() {
 	incudeDirs := flag.Bool("d", false, "incule dirs")

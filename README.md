@@ -39,7 +39,7 @@ or see release.
 
 ```
 brn --help
-brn v1.0
+brn v1.1
 Bulk renamer
 
 DESCRIPTION
