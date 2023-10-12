@@ -19,7 +19,8 @@ func main() {
 
 	switch len(args) {
 	case 0:
-		err = renameDir(".", *incudeDirs, *inclueHiddenFiles)
+		usages()
+		os.Exit(1)
 	case 1:
 		var stat os.FileInfo
 		if stat, err = os.Stat(args[0]); err != nil {
@@ -33,7 +34,7 @@ func main() {
 	}
 
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "err: %s\n", err)
+		fmt.Fprintf(os.Stderr, "unexpected: %s\n", err)
 		os.Exit(1)
 	}
 }
@@ -44,10 +45,10 @@ Bulk renamer
 
 DESCRIPTION
 	brn takes the specified files and puts them into a text buffer and open your editor "EDITOR" env var
-	or "nvim", "vim", "vi", "nano" and lets you edit the the file names. if the file name was changed only
+	or "nvim", "vim", "vi", "nano" and lets you edit the the file names. if the file any name was changed only
 	those fils are renamed.
 
-	Note: Deleting fils are not supported.
+	Note: Deleting fils are not supported. This will resut in "err: file names currupted"
 
 OPTIONS:
     -d
@@ -58,9 +59,10 @@ OPTIONS:
 
 EXAMPLES:
 	$ export EDITOR=nvim # set the env var
-	$ brn			# rename only the files in current dir "."
-	$ brn -d		# name files and directoris in current dir "."
-	$ brn -d -h		# name files and directoris including hidden files in current dir "."
+
+	$ brn .			# rename only the files in current dir "."
+	$ brn . -d		# name files and directoris in current dir "."
+	$ brn . -d -h	# name files and directoris including hidden files in current dir "."
 	$ brn fo		# rename only the files in the dir "fo"
 	$ brn f f2 f3	# rename only the files "f f2 f3"
 	$ brn *.mp4		# rename only the files ending with "mp4" // bash magic!
