@@ -4,8 +4,29 @@ Bulk rename files in a sweep with your favourite text [editor](#editor). (I know
 
 ## Install
 
+See [releases](https://github.com/wizsk/brn/releases) for pre-built binaries.
+
+Building from the source requires [Go](https://go.dev/).
+
+On Unix:
+
 ```bash
-go install https://github.com/wizsk/brn
+env CGO_ENABLED=0 go install -ldflags="-s -w" github.com/wizsk/brn@latest
+```
+
+On Windows `cmd`:
+<!-- guess people does use windows -->
+
+```cmd
+set CGO_ENABLED=0
+go install -ldflags="-s -w" github.com/wizsk/brn@latest
+```
+
+On Windows `powershell`:
+
+```powershell
+$env:CGO_ENABLED = '0'
+go install -ldflags="-s -w" github.com/wizsk/brn@latest
 ```
 or see release.
 
@@ -17,25 +38,32 @@ or see release.
 ## Usages
 
 ```
-brn
+brn --help
+brn v1.0
 Bulk renamer
 
-USAGE:
-    brn [OPTIONS [Directory name]] [FILE]...
+DESCRIPTION
+	brn takes the specified files and puts them into a text buffer and open your editor "EDITOR" env var
+	or "nvim", "vim", "vi", "nano" and lets you edit the the file names. if the file name was changed only
+	those fils are renamed.
+
+	Note: Deleting fils are not supported.
 
 OPTIONS:
     -d
-	inclue directories while renaming. (default "false")
+	inclue directories while renaming. By default diretories are exclued.
 
     -p
-	inclue hidden files or directories while renaming. (default "false")
+	inclue hidden files or directories while renaming.By default hidden files are are exclued.
 
 EXAMPLES:
-	1. By defaut if directory name is provided it will use "." current dir.
-		$ brn media # will rename the contents of the media dir
-
-	2. Remaning selected files
-		$ brn *.mp4 # to rename the mp4 only
+	$ export EDITOR=nvim # set the env var
+	$ brn			# rename only the files in current dir "."
+	$ brn -d		# name files and directoris in current dir "."
+	$ brn -d -h		# name files and directoris including hidden files in current dir "."
+	$ brn fo		# rename only the files in the dir "fo"
+	$ brn f f2 f3	# rename only the files "f f2 f3"
+	$ brn *.mp4		# rename only the files ending with "mp4" // bash magic!
 ```
 ## Editor
 

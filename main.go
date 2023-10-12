@@ -10,7 +10,7 @@ const vertion = "1.0"
 
 func main() {
 	incudeDirs := flag.Bool("d", false, "incule dirs")
-	inclueHiddenFiles := flag.Bool("p", false, "incule hidden files")
+	inclueHiddenFiles := flag.Bool("h", false, "incule hidden files")
 	flag.Usage = usages
 	flag.Parse()
 	args := flag.Args()
@@ -39,26 +39,31 @@ func main() {
 }
 
 func usages() {
-	fmt.Printf(`
-brn v%s
+	fmt.Printf(`brn %s
 Bulk renamer
 
-USAGE:
-    brn [OPTIONS [Directory name]] [FILE]...
+DESCRIPTION
+	brn takes the specified files and puts them into a text buffer and open your editor "EDITOR" env var
+	or "nvim", "vim", "vi", "nano" and lets you edit the the file names. if the file name was changed only
+	those fils are renamed.
+
+	Note: Deleting fils are not supported.
 
 OPTIONS:
     -d
-	inclue directories while renaming. (default "false")
+	inclue directories while renaming. By default diretories are exclued.
 
-    -p
-	inclue hidden files or directories while renaming. (default "false")
+    -h
+	inclue hidden files or directories while renaming.By default hidden files are are exclued.
 
 EXAMPLES:
-	1. By defaut if directory name is provided it will use "." current dir.
-		$ brn media # will rename the contents of the media dir
+	$ export EDITOR=nvim # set the env var
+	$ brn			# rename only the files in current dir "."
+	$ brn -d		# name files and directoris in current dir "."
+	$ brn -d -h		# name files and directoris including hidden files in current dir "."
+	$ brn fo		# rename only the files in the dir "fo"
+	$ brn f f2 f3	# rename only the files "f f2 f3"
+	$ brn *.mp4		# rename only the files ending with "mp4" // bash magic!
 
-	2. Remaning selected files
-		$ brn *.mp4 # to rename the mp4 only
 `, vertion)
-
 }
