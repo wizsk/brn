@@ -26,15 +26,22 @@ func rename(fileNames []string, fileNamesBuff bytes.Buffer, currDir string) erro
 	}
 
 	editor := os.Getenv("EDITOR")
+	editorWithArgs := []string{}
 	if editor == "" {
 		editor = getPrefferedEditor()
 		// TODO: handle err err
 		if editor == "" {
 			return fmt.Errorf("err: could not find an editor")
 		}
+	} else {
+		editorWithArgs = strings.Split(strings.TrimSpace(editor), " ")
+		if len(editorWithArgs) == 0 {
+			return fmt.Errorf("err: invalid editor name")
+		}
 	}
 
-	cmd := exec.Command(editor, changedFileNameFile.Name())
+	editorWithArgs = append(editorWithArgs, changedFileNameFile.Name())
+	cmd := exec.Command(editorWithArgs[0], editorWithArgs[1:]...)
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout
 
